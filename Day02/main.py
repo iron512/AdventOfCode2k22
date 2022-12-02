@@ -22,7 +22,7 @@ def gesture_prec(val):
 
 
 # evaluates the match and the scores
-def match_eval(me, opp):
+def match_eval_original(me, opp):
     if gesture_next(me) == opp:
         # lost
         return 0
@@ -34,18 +34,35 @@ def match_eval(me, opp):
         return 3
 
 
+def match_eval_predict(me, opp):
+    if me == 1:
+        # lost
+        return gesture_prec(opp)
+    elif me == 3:
+        # won
+        return gesture_next(opp)
+    else:
+        # draw
+        return opp
+
+
 def main(test):
     rows = open("input_easy.txt").read()
     if not test:
         rows = open("input.txt").read()
 
     matches = rows.split("\n")
-    total = 0
+    total_original = 0
+    total_predict = 0
     for match in matches:
+        # part 1
         elf, you = [hand_map(gesture) for gesture in match.split(" ")]
-        total += you + match_eval(you, elf)
+        total_original += you + match_eval_original(you, elf)
+        # part 2
+        total_predict += match_eval_predict(you, elf) + (you-1)*3
 
-    print("Your total score against", len(matches), "elves is:", total)
+    print("Your total score against", len(matches), "elves is:", total_original)
+    print("The score you should try to get against", len(matches), "elves is:", total_predict)
 
 
 if __name__ == '__main__':
