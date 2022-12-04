@@ -6,7 +6,7 @@ def main(test):
     total = 0
     for sack in rows:
         # should contain a set long N of equal items
-        copy = [item for item in sack[:int(len(sack) / 2)] if item in sack[int(len(sack) / 2):]][0]
+        copy = set(sack[:int(len(sack) / 2)]).intersection(set(sack[int(len(sack) / 2):])).pop()
         total += ord(copy) - ord('a') + 1 if copy.islower() else ord(copy) - ord('A') + 27
     print("The total priority is:", total)
 
