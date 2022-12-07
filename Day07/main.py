@@ -25,10 +25,16 @@ class Node:
 			print("  ├─ ", end="")
 			view_levels[self.level] = True
 
-		print(self.name, " (", round(self.size/1000), " KB)", sep="")
+		print(self.name, " (", self.str_size(), ")", sep="")
 		for idx, child in enumerate(self.children):
 			child.print_directory(view_levels, last=(idx == len(self.children)-1))
 
+	def str_size(self):
+		if self.size > 1000000000000: return str(round(self.size/1000000000000, 2)) + " TB"
+		if self.size > 1000000000: return str(round(self.size/1000000000, 2)) + " GB"
+		if self.size > 1000000: return str(round(self.size/1000000, 2)) + " MB"
+		if self.size > 1000: return str(round(self.size/1000, 2)) + " KB"
+		return str(self.size) + " B"
 
 def main(test):
 	rows = open("input_easy.txt").read().split("\n")
