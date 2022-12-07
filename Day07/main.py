@@ -23,6 +23,7 @@ class Node:
 			view_levels[self.level] = False
 		else:
 			print("  ├─ ", end="")
+			view_levels[self.level] = True
 
 		print(self.name, " (", round(self.size/1000), " KB)", sep="")
 		for idx, child in enumerate(self.children):
