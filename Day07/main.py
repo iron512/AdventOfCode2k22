@@ -7,6 +7,27 @@ class Node:
 		self.level = level
 		self.children = []
 
+	def print_directory_wrapper(self, max_levels):
+		view_lvl = [True for lvl in range(max_levels+1)]
+		self.print_directory(view_levels=view_lvl, last=True)
+
+	def print_directory(self, view_levels, last):
+		for i in range(self.level):
+			if view_levels[i]:
+				print("  │", end="")
+			else:
+				print("   ", end="")
+
+		if last:
+			print("  └─ ", end="")
+			view_levels[self.level] = False
+		else:
+			print("  ├─ ", end="")
+
+		print(self.name, " (", round(self.size/1000), " KB)", sep="")
+		for idx, child in enumerate(self.children):
+			child.print_directory(view_levels, last=(idx == len(self.children)-1))
+
 
 def main(test):
 	rows = open("input_easy.txt").read().split("\n")
@@ -20,7 +41,7 @@ def main(test):
 	current_folder = None
 
 	directories = [home_folder]
-
+	# Input Parsing
 	for row in rows:
 		if row.startswith("$ cd "):
 			folder_name = row.replace("$ cd ", "")
@@ -48,13 +69,23 @@ def main(test):
 				current_folder.children.append(Node(current_folder, name, 'file', int(size), lvl))
 		max_lvl = max(lvl, max_lvl)
 
+	# Compute the folders
 	for outer in range(max_lvl, -1, -1):
 		for directory in [directory for directory in directories if directory.level == outer]:
 			directory.size = sum([element.size for element in directory.children])
 
-	# print([(folder.name, folder.size) for folder in directories])
+	# Part 1
 	smaller_sum = sum([folder.size for folder in directories if folder.size < 100000])
-	print("The sum of the smaller (<100000) folders is: ", smaller_sum)
+	print("The sum of the smaller (<100000) folders is:", smaller_sum)
+
+	# Part 2
+	fs_required = home_folder.size - 40000000
+	smaller_required = min([folder.size for folder in directories if folder.size > fs_required])
+	print("The smaller directory large enough to fit the update is:", smaller_required)
+
+	# Visualizer
+	print("\nVisual structure:")
+	home_folder.print_directory_wrapper(max_lvl)
 
 
 if __name__ == '__main__':
