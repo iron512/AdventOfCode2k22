@@ -36,6 +36,7 @@ class Node:
 		if self.size > 1000: return str(round(self.size/1000, 2)) + " KB"
 		return str(self.size) + " B"
 
+
 def main(test):
 	rows = open("input_easy.txt").read().split("\n")
 	if not test:
