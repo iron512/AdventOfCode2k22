@@ -12,3 +12,11 @@ We'll see how much I can keep up. This year I have been challenged by my dear [S
 - The day after Day1, one of my colleagues and I were talking about oneliners. So I decided to solve it again with an oneliner.
 - On Day3 that same colleague showed me a *superclever* way to solve the character mapping. I definitely stoled it.
 - Day6 was quite easy. Solved it from Trento to Lavis (even faster than Day1)
+- in Day07 I also prompted a visualization of the asked directory. I had produced one too during the Operating System course, in 2017
+- Day09 was quite tough. The abstraction i planned in the beginning however was quite correct. Big up.
+- I really loved Day10. I love when the result displays some kinda of screen or whatever.
+- Day11 was kinda fun. Not for the problem itself, but myself thinking that part 2 were soooo easy. After failing, I knew it was about the correct use of congruent classes and so on due to the constant use of module operation. but It took me some time to figure out a fast and reliable solution. It is crazy how much linear algebra taunts me every day
+> Lol quite easy, switch the 20 to 10000 and remove the / 3 
+>
+> -- *my (stupid) self*
+
