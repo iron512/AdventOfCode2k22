@@ -9,6 +9,6 @@ for item in [("0" if day < 10 else "") + str(day) for day in range(1, datetime.n
         open("./Day"+item+"/input_easy.txt", "w").close()
 
         main = open("./Day"+item+"/main.py", "w")
-        main.write('def main(test):\n\trows = open("input_easy.txt").read()\n\tif not test:')
+        main.write('def main(test=False):\n\trows = open("input_easy.txt").read()\n\tif not test:')
         main.write('\n\t\trows = open("input.txt").read()\n\n\nif __name__ == \'__main__\':\n\tmain(True)\n')
         main.close()
