@@ -21,6 +21,7 @@ def main(test=False):
 	graph = nx.DiGraph()
 
 	starting_point = 0
+	starting_points = []
 	ending_point = -1
 	for idx, row in enumerate(rows):
 		for idy, char in enumerate(row):
@@ -29,6 +30,9 @@ def main(test=False):
 
 			if char == 'S':
 				starting_point = node_id
+
+			if char == 'a':
+				starting_points.append(node_id)
 
 			if char == 'E':
 				ending_point = node_id
@@ -45,7 +49,20 @@ def main(test=False):
 					if dest['height'] <= node['height'] + 1:
 						graph.add_edge(node_id, neighbour_id)
 
-	print(len(nx.shortest_path(graph, starting_point, ending_point))-1)
+	# Part 1
+	shortest_from_s = len(nx.shortest_path(graph, starting_point, ending_point))-1
+	print("The shortest path starting from S to E takes", shortest_from_s, "steps")
+
+	# Part 2
+	path_lengths = []
+	for sp in starting_points:
+		try:
+			path_lengths.append(len(nx.shortest_path(graph, sp, ending_point))-1)
+		except:
+			pass
+			# print("No path found. Skipping")
+
+	print("The shortest path starting from any deep (a) point to E takes", min(path_lengths), "steps")
 
 
 if __name__ == '__main__':
